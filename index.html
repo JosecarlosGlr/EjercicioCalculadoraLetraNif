@@ -1,16 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora de Letra NIF</title>
 </head>
 <body>
-    <h1>Cálculo de Letra del Nif</h1>
+    <h1>Cálculo de Letra del NIF</h1>
     <div id="calculo-Letra">
-    <label for="">Número de NIF</label>
-    <input type="text" id="nif">
-    <button>Calcular Letra del NIF</button>
+        <label for="nif">Número de NIF</label>
+        <input type="text" id="nif">
+        <button onclick="muestraLetraNif()">Calcular Letra del NIF</button>
     </div>
+
+    <script>
+        function calculaLetraNif(nif) {
+            var letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+            var posicion = nif % 23;
+            return letras.charAt(posicion);
+        }
+
+        function muestraLetraNif() {
+            var nifInput = document.getElementById("nif").value.trim();
+            var nif = parseInt(nifInput, 10);
+
+            if (isNaN(nif) || nif < 0 || nif > 99999999) {
+                alert("Introduce un número de NIF válido (0 - 99999999)");
+                return;
+            }
+
+            var letra = calculaLetraNif(nif);
+            var nifConLetra = nif + "-" + letra;
+            alert("El NIF completo es: " + nifConLetra);
+        }
+    </script>
 </body>
 </html>
+
