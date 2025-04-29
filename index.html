@@ -55,19 +55,20 @@
 
     <script>
         function calculaLetraNif(nif) {
-            const regex =/^\d{8}$/;
-            if (regex.test(nif)){
-                var letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+            var letras = "TRWAGMYFPDXBNJZSQVHLCKE";
             var posicion = nif % 23;
-            return letras.charAt(posicion);  
-            }else{
-                alert("Introduce un número de NIF válido");
-            }
+            return letras.charAt(posicion);
         }
 
         function muestraLetraNif() {
             var nifInput = document.getElementById("nif").value.trim();
             var nif = parseInt(nifInput, 10);
+
+            if (isNaN(nif) || nif < 0 || nif > 99999999) {
+                alert("Introduce un número de NIF válido (0 - 99999999)");
+                return;
+            }
+
             var letra = calculaLetraNif(nif);
             var nifConLetra = nif + "-" + letra;
             alert("El NIF completo es: " + nifConLetra);
